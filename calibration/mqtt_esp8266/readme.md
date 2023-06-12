@@ -17,3 +17,26 @@ This code is an example of how to use the Adafruit MQTT Library with the ESP8266
 3. The code sets up a feed called 'photocell' for publishing and a feed called 'onoff' for subscribing to changes
 4. The code uses the `MQTT_connect()` function to ensure a connection to the MQTT server and automatically reconnect when disconnected
 5. The code uses the `loop()` function to read any incoming subscription packets and take appropriate actions
+
+## Flowchart 
+
+```mermaid
+graph TD
+A[Start] --> B[Setup]
+B --> C[Connect to WiFi access point]
+C --> D[Subscribe to onoff feed]
+D --> E[Initialize x to 0]
+E --> F[MQTT_connect]
+F --> G[Read MQTT subscription]
+G -- Yes --> H[Check if subscription is on off button]
+H -- Yes --> I[Print received value]
+I --> G
+H -- No --> G
+G --> J[Publish photocell value]
+J --> K[Check if publish is successful]
+K -- Yes --> L[Increment x]
+L --> M[Print success message]
+M --> F
+K -- No --> M
+F --> N[End]
+```
