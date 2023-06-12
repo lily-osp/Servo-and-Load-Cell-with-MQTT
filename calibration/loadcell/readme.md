@@ -26,6 +26,40 @@ To implement calibration in your project sketch, the simplified procedure is as 
 5. Send 'c' from serial monitor to manually change the calibration value
 6. Make sure there is no weight on the load cell before running the code
 
+## Flowchart 
+
+```mermaid
+graph TD
+A[Start] --> B[Setup]
+B --> C[Initialize Serial communication]
+C --> D[Initialize HX711_ADC]
+D --> E[Perform tare operation]
+E -- Yes --> F[Check tare status]
+F -- Yes --> G[Calibrate]
+G --> H[Perform tare operation]
+H -- Yes --> I[Check tare status]
+I -- Yes --> J[Enter known mass]
+J --> K[Refresh dataset]
+K --> L[Get new calibration value]
+L --> M[Print new calibration value]
+M --> N[Prompt to save calibration value]
+N -- Yes --> O[Save calibration value to EEPROM]
+O --> P[Read saved calibration value from EEPROM]
+P --> M
+N -- No --> M
+M --> Q[End calibration]
+Q --> R[Loop]
+R --> S[Check for new data]
+S -- Yes --> T[Print load cell output value]
+T --> R
+S -- No --> U[Check for serial command]
+U -- Yes --> V[Tare operation]
+V -- Yes --> R
+U -- No --> W[Check tare status]
+W -- Yes --> X[Print tare complete message]
+X --> R
+```
+
 ## Note
 - The `LoadCell.setReverseOutput()` function is used to turn a negative output value to positive.
 - The `LoadCell.start(stabilizingtime, _tare)` function is used to start the load cell with a stabilization time and tare option.
