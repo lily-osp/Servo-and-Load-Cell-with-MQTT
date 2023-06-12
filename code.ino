@@ -17,12 +17,12 @@ const unsigned long eventInterval = 3000;
 unsigned long previousTime = 0;
 
 // Wifi and MQTT config
-#define WLAN_SSID       "azzar's phone"
+#define WLAN_SSID       "ssid"
 #define WLAN_PASS       "password"
 #define AIO_SERVER      "io.adafruit.com"
 #define AIO_SERVERPORT  1883
-#define AIO_USERNAME    "Izmi"
-#define AIO_KEY         "aio_yqlp10lxHXid8PGKx1DDaJlkP1Bl"
+#define AIO_USERNAME    "aio_username"
+#define AIO_KEY         "aio_key"
 
 WiFiClient client;
 Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO_KEY);
