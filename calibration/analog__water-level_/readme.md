@@ -15,6 +15,28 @@ This code demonstrates one technique for calibrating sensor input. The sensor re
 6. The sensor value will be read in the `loop()` function and constrained to the calibrated minimum and maximum values.
 7. The calibrated sensor value will be mapped to a value between 0 and 255 and used to control the brightness of the LED on pin 9.
 
+## Flowchart 
+
+```mermaid
+graph TD
+A[Start] --> B[Setup]
+B --> C[Turn on LED]
+C --> D[Calibration loop]
+D --> E[Read sensor value]
+E --> F[Check if sensor value is greater than sensorMax]
+F -- Yes --> G[Update sensorMax]
+F -- No --> H[Check if sensor value is less than sensorMin]
+H -- Yes --> I[Update sensorMin]
+H -- No --> D
+D --> J[Turn off LED]
+J --> K[Loop]
+K --> L[Read sensor value]
+L --> M[Constrain sensor value within range]
+M --> N[Apply calibration]
+N --> O[Fade LED using calibrated value]
+O --> K
+```
+
 ## Note
 - The `constrain(sensorValue, sensorMin, sensorMax)` function is used to ensure that the sensor value is within the calibrated range.
 - The `map(sensorValue, sensorMin, sensorMax, 0, 255)` function is used to map the calibrated sensor value to a value between 0 and 255.
